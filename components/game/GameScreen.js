@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, View, Text } from "react-native";
 import GameClass from "../game/GameClass";
 
 const GameScreen = props => {
-  let gameToBeRendered = GameClass._getRandomGame();
+  const [allGames, setAllGames] = useState({
+    activeGame: GameClass._getOneGame()
+  });
+
+  const changeGame = () => {
+    const arrayCopy = allGames.activeGame;
+    arrayCopy.shift();
+    setAllGames({
+      activeGame: arrayCopy
+    });
+  };
+
+  let game = allGames.activeGame[0].component;
+
   return (
     <View
       style={{
@@ -11,7 +24,10 @@ const GameScreen = props => {
         alignItems: "center",
         justifyContent: "center"
       }}
-    ></View>
+    >
+      {game}
+      <Button title="next game" onPress={() => changeGame()} />
+    </View>
   );
 };
 

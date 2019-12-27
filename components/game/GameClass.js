@@ -2,6 +2,7 @@ import React from "react";
 import PekeLeken from "./PekeLeken/PekeLekenClass";
 import RandomQuestions from "./RandomQuestions/RandomQuestions";
 import PekeLekenComponent from "./PekeLeken/PekeLekenComponent";
+import RandomQuestionComponent from "./RandomQuestions/RandomQuestionComponent";
 
 class Game {
   constructor() {
@@ -61,8 +62,24 @@ class Game {
     return console.log("members", this.members);
   }
 
+  _getAllGames() {
+    return this.completeGamesList;
+  }
+
   _getRandomGame() {
-    return this.completeGamesList[0].component;
+    return this.completeGamesList[
+      Math.floor(Math.random() * this.completeGamesList.length)
+    ];
+  }
+
+  _getOneGame() {
+    return this.completeGamesList;
+  }
+
+  _endGame() {
+    console.log("end game", this.completeGamesList[1].name);
+    this.completeGamesList.shift();
+    console.log("game has been ended", this.completeGamesList[0].name);
   }
 }
 
