@@ -2,6 +2,7 @@ import * as React from "react";
 import { Button, View, Text } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import mainMenu from "./components/menu/mainMenu"
 
 class HomeScreen extends React.Component {
   render() {
