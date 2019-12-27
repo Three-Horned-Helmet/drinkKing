@@ -10,7 +10,7 @@ const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
     Login: LoginScreen,
-    Boolean: TrueFalse
+    Boolean: BooleanScreen
   },
   {
     initialRouteName: "Home"

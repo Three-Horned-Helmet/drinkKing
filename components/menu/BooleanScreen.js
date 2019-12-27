@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 const BooleanScreen = props => {
   const [trueFalseState, setTrueFalseState] = useState({
@@ -23,11 +23,12 @@ const BooleanScreen = props => {
   });
 
   // fetches info from opentdb
-  async function getQuestions(x = "10") {
+  // n determines how many questions
+  async function getQuestions(n = "10") {
     let response;
     try {
       response = await fetch(
-        `https://opentdb.com/api.php?amount=10&type=boolean`
+        `https://opentdb.com/api.php?amount=${n}&type=boolean`
       );
       let responseJson = await response.json();
       return responseJson;
@@ -44,7 +45,7 @@ const BooleanScreen = props => {
         loading: false
       });
     });
-  });
+  }, []);
 
   // checks if answer is correct
   const checkAnswer = bool => {
@@ -92,6 +93,9 @@ const BooleanScreen = props => {
       backgroundColor: "#8B0000"
     });
   };
+  const questionText = n => {
+    return trueFalseState.questions[n].question.replace(/&quot;/g, '\\"');
+  };
 
   // generates question
   const questionGenerator = () => {
@@ -101,10 +105,10 @@ const BooleanScreen = props => {
       <View>
         <Text style={styles.currentPlayer}>{trueFalseState.currentPlayer}</Text>
         <Text style={styles.currentPoints}>
-          Current sips: {trueFalseState.currentQuestion + 1}
+          Current sips: {trueFalseState.currentQuestion}
         </Text>
         <Text style={styles.question}>
-          {trueFalseState.questions[trueFalseState.currentQuestion].question}
+          {questionText(trueFalseState.currentQuestion)}
         </Text>
         <View style={styles.buttons}>
           <Button onPress={() => checkAnswer("True")} title="true" />
@@ -120,7 +124,7 @@ const BooleanScreen = props => {
     const gameOver = (
       <Text style={styles.gameOverText}>
         {trueFalseState.currentPlayer} must drink{" "}
-        {trueFalseState.currentQuestion} sips!
+        {trueFalseState.currentQuestion + 1} sips!
       </Text>
     );
     return gameOver;
