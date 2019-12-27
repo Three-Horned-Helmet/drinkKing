@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-const TrueFalse = props => {
+const BooleanScreen = props => {
   const [trueFalseState, setTrueFalseState] = useState({
     correctAnswers: 0,
     backgroundColor: "#fff",
@@ -22,13 +22,10 @@ const TrueFalse = props => {
     loading: true
   });
 
-  // props.members.length * 2
   // fetches info from opentdb
   async function getQuestions(x = "10") {
-    console.log("getQuestions function", x);
     let response;
     try {
-      console.log("trying stuff");
       response = await fetch(
         `https://opentdb.com/api.php?amount=10&type=boolean`
       );
@@ -40,29 +37,17 @@ const TrueFalse = props => {
   }
 
   useEffect(() => {
-    console.log("using effect");
     getQuestions().then(result => {
-      console.log(result, "result");
       setTrueFalseState({
         ...trueFalseState,
         questions: result.results,
         loading: false
       });
     });
-  }, [console.log(trueFalseState, "state")]);
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: trueFalseState.backgroundColor,
-      alignItems: "center",
-      justifyContent: "center"
-    }
   });
 
+  // checks if answer is correct
   const checkAnswer = bool => {
-    console.log("checkAnswer", bool);
-
     if (
       bool ===
       trueFalseState.questions[trueFalseState.currentQuestion].correct_answer
@@ -73,81 +58,111 @@ const TrueFalse = props => {
     }
   };
 
+  // updates player turn
   const getNewPlayer = () => {
-    // props.members
     let membersArray = trueFalseState.members;
     membersArray.pop(trueFalseState.currentPlayer);
-    return membersArray[Math.floor(Math.random() * membersArray.length)];
+    const name = membersArray[Math.floor(Math.random() * membersArray.length)];
+
+    return name;
   };
 
   const correctAnswer = () => {
-    console.log("correctanswer");
     let currentPoints = trueFalseState.currentQuestion;
     currentPoints += 1;
     let newPlayer = getNewPlayer();
     setTrueFalseState({
       ...trueFalseState,
-      currentQuestion: currentPoints,
-      currentPlayer: newPlayer,
       backgroundColor: "#23B631"
     });
     setTimeout(() => {
       setTrueFalseState({
         ...trueFalseState,
+        currentPlayer: newPlayer,
+        currentQuestion: currentPoints,
         backgroundColor: "#fff"
       });
     }, 200);
   };
 
   const wrongAnswer = () => {
-    console.log("wrongAnswer");
     setTrueFalseState({
       ...trueFalseState,
       gameOver: true,
       backgroundColor: "#8B0000"
     });
   };
+
+  // generates question
   const questionGenerator = () => {
     const question = trueFalseState.loading ? (
       <Text>Loading..</Text>
     ) : (
       <View>
-        <Text>Player turn: {trueFalseState.currentPlayer}</Text>
-        <Text>
-          {trueFalseState.currentPlayer} must drink
-          {trueFalseState.currentQuestion} sips!
+        <Text style={styles.currentPlayer}>{trueFalseState.currentPlayer}</Text>
+        <Text style={styles.currentPoints}>
+          Current sips: {trueFalseState.currentQuestion + 1}
         </Text>
-        <Text>
+        <Text style={styles.question}>
           {trueFalseState.questions[trueFalseState.currentQuestion].question}
         </Text>
-        <View>
-          <Button title="true" onPress={() => checkAnswer("True")} />
-          <Button title="false" onPress={() => checkAnswer("False")} />
+        <View style={styles.buttons}>
+          <Button onPress={() => checkAnswer("True")} title="true" />
+          <Button onPress={() => checkAnswer("False")} title="false" />
         </View>
       </View>
     );
     return question;
   };
 
+  // generates gameover component
   const gameOverGenerator = () => {
-    const gameOver = trueFalseState.loading ? <Text></Text> : <Text>AAA</Text>;
+    const gameOver = (
+      <Text style={styles.gameOverText}>
+        {trueFalseState.currentPlayer} must drink{" "}
+        {trueFalseState.currentQuestion} sips!
+      </Text>
+    );
     return gameOver;
   };
+
+  // style. Wrong
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: trueFalseState.backgroundColor,
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: 10
+    },
+    buttons: {
+      flex: 1,
+      flexDirection: "row",
+      justifyContent: "space-around"
+    },
+    currentPoints: {
+      fontSize: 25,
+      marginTop: 20
+    },
+    currentPlayer: {
+      marginTop: 40,
+      fontSize: 40
+    },
+    question: {
+      marginTop: 150,
+      fontSize: 40
+    },
+    gameOverText: {
+      color: "#fff",
+      fontSize: 50
+    }
+  });
+
   return (
     <View style={styles.container}>
       {trueFalseState.gameOver ? gameOverGenerator() : questionGenerator()}
     </View>
   );
-
-  /* todo */
-  // fetch informasjon fra api. Dobbelt så mange spørsmål som spillere
-  // rask informasjon til brukeren. (velg hva du tror er riktig og send telefonen til din høyre)
-  // score blir vist øverst til høyre
-  // skjermen blinker grønt ved riktig valg
-  // skjermen blir rød med stor tekst ved feil valg. "Du må drikke X slurker lawl"
-  // "Gå tilbake til home screen"
-
-  // fetch information from
 };
 
-export default TrueFalse;
+export default BooleanScreen;
