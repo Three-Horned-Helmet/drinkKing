@@ -7,23 +7,63 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Enter names</Text>
         <Button
-          title="Go to Details"
+          title="Play"
           onPress={() => this.props.navigation.navigate("Details")}
+        />
+        <Button
+          title="Login"
+          onPress={() => this.props.navigation.navigate("Login")}
+        />
+
+        <Button
+          title="Settings"
+          onPress={() => this.props.navigation.navigate("Settings")}
+        />
+        <Button
+          title="Boolean"
+          onPress={() => this.props.navigation.navigate("Boolean")}
         />
       </View>
     );
   }
 }
 
-class DetailsScreen extends React.Component {
+class LoginScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Details Screen</Text>
+        <Text>Login Screen</Text>
         <Button
-          title="Enter names"
+          title="Go Home"
+          onPress={() => this.props.navigation.navigate("Home")}
+        />
+      </View>
+    );
+  }
+}
+
+class SettingsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Settings</Text>
+        <Button
+          title="Go home"
+          onPress={() => this.props.navigation.navigate("Home")}
+        />
+      </View>
+    );
+  }
+}
+
+class BooleanScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Boolean</Text>
+        <Button
+          title="Go home"
           onPress={() => this.props.navigation.navigate("Home")}
         />
       </View>
@@ -34,7 +74,9 @@ class DetailsScreen extends React.Component {
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen
+    Login: LoginScreen,
+    Settings: SettingsScreen,
+    Boolean: BooleanScreen
   },
   {
     initialRouteName: "Home"
