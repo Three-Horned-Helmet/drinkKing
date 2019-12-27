@@ -1,5 +1,3 @@
-// By Markus Heldrup only
-
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
