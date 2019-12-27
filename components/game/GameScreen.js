@@ -3,7 +3,7 @@ import { Button, View, Text } from "react-native";
 import GameClass from "../game/GameClass";
 
 const GameScreen = props => {
-  GameClass._displayMembers();
+  let gameToBeRendered = GameClass._getRandomGame();
   return (
     <View
       style={{
@@ -12,7 +12,7 @@ const GameScreen = props => {
         justifyContent: "center"
       }}
     >
-      <Text>Best game</Text>
+      {gameToBeRendered}
     </View>
   );
 };

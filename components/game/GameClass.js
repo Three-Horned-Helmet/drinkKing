@@ -1,3 +1,4 @@
+import React from "react";
 import PekeLeken from "./PekeLeken/PekeLekenClass";
 import RandomQuestions from "./RandomQuestions/RandomQuestions";
 import PekeLekenComponent from "./PekeLeken/PekeLekenComponent";
@@ -6,7 +7,12 @@ class Game {
   constructor() {
     this.members;
     this.completeGamesList = [
-      { game: PekeLeken, name: "Peke Leken", weight: 1 },
+      {
+        game: PekeLeken,
+        name: "Peke Leken",
+        weight: 1,
+        component: <PekeLekenComponent />
+      },
       { game: RandomQuestions, name: "Random Questions", weight: 5 }
     ];
     this.activeGames = [];
@@ -48,6 +54,10 @@ class Game {
 
   _displayMembers() {
     return console.log("members", this.members);
+  }
+
+  _getRandomGame() {
+    return this.completeGamesList[0].component;
   }
 }
 
