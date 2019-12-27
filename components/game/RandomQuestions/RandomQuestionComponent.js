@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, View, Text } from "react-native";
-import GameClass from "../game/GameClass";
 
-const GameScreen = props => {
-  let gameToBeRendered = GameClass._getRandomGame();
+const RandomQuestionComponent = props => {
   return (
     <View
       style={{
@@ -11,8 +9,10 @@ const GameScreen = props => {
         alignItems: "center",
         justifyContent: "center"
       }}
-    ></View>
+    >
+      <Text>RandomQuestionComponent</Text>
+    </View>
   );
 };
 
-export default GameScreen;
+export default RandomQuestionComponent;

@@ -13,7 +13,12 @@ class Game {
         weight: 1,
         component: <PekeLekenComponent />
       },
-      { game: RandomQuestions, name: "Random Questions", weight: 5 }
+      {
+        game: RandomQuestions,
+        name: "Random Questions",
+        weight: 5,
+        component: <RandomQuestionComponent />
+      }
     ];
     this.activeGames = [];
 
