@@ -3,7 +3,7 @@ import PekeLeken from "./PekeLeken/PekeLekenClass"
 class Game {
     constructor(){
         this.members;
-        this.completeGamesList = [{game: PekeLeken, name: "Peke Leken", weight}, {game: "yolo", name: "yolo"}]
+        this.completeGamesList = [{game: PekeLeken, name: "Peke Leken", weight: 1}]
         this.activeGames = []
 
 
@@ -45,7 +45,7 @@ class Game {
                 i -= 1
             }
         }
-        
+
     }
 }
 
