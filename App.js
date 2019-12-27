@@ -2,6 +2,7 @@ import * as React from "react";
 import { Button, View, Text } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import TrueFalse from "./TrueFalse";
 
 class HomeScreen extends React.Component {
   render() {
@@ -59,15 +60,7 @@ class SettingsScreen extends React.Component {
 
 class BooleanScreen extends React.Component {
   render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Boolean</Text>
-        <Button
-          title="Go home"
-          onPress={() => this.props.navigation.navigate("Home")}
-        />
-      </View>
-    );
+    return <TrueFalse />;
   }
 }
 
