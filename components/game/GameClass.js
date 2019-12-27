@@ -1,24 +1,23 @@
 import PekeLeken from "./PekeLeken/PekeLekenClass"
+import RandomQuestions from "./RandomQuestions/RandomQuestions"
 
 class Game {
     constructor(){
         this.members;
-        this.completeGamesList = [{game: PekeLeken, name: "Peke Leken", weight: 1}]
+        this.completeGamesList = [
+            {game: PekeLeken, name: "Peke Leken", weight: 1}, 
+            {game: RandomQuestions, name: "Random Questions", weight: 5} ]
         this.activeGames = []
 
 
         this.isGameName = function(element, gameName){
-            console.log("IsGAme Name")
             let isPresent = false
 
             gameName.map((ele) =>{
                 if(ele == element.name){
-                    console.log("ELE == element", ele, element, element.name)
                     return isPresent = true
                 }
             })
-
-            console.log("is present ", isPresent)
 
             return isPresent
         }
