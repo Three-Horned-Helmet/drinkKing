@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const BooleanScreen = props => {
