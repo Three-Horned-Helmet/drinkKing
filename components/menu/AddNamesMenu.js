@@ -41,11 +41,13 @@ const AddNamesMenu = props => {
       ...loginDetails,
       participants: amount
     });
-    console.log(loginDetails.participants);
+    GameClass._addMembers(loginDetails.participants);
+    props.navigation.navigate("GameScreen");
   };
 
   const handleParticipantPush = x => {
     const participantsArray = loginDetails.participants;
+
     participantsArray.push(x);
     setLoginDetails({
       ...loginDetails,
@@ -62,7 +64,9 @@ const AddNamesMenu = props => {
   };
 
   const renderParticipants = () => {
-    return loginDetails.participants.map(item => <Text>{item}</Text>);
+    return loginDetails.participants.map((item, index) => (
+      <Text key={index}>{item}</Text>
+    ));
   };
 
   return (
