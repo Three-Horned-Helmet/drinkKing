@@ -1,16 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Button, View, Text } from "react-native";
 import RandomQuestion from "./RandomQuestions";
 
 const RandomQuestionComponent = props => {
-
   const [randomQuestionState, setRandomQuestionState] = useState({
-    currentRandomQuestion: RandomQuestion._pickRandomQuestion(),
-  })
+    currentRandomQuestion: RandomQuestion._pickRandomQuestion()
+  });
 
   const handleNextQuestion = () => {
-    setRandomQuestionState({})
-  }
+    setRandomQuestionState({
+      ...randomQuestionState,
+      currentRandomQuestion: RandomQuestion._pickRandomQuestion()
+    });
+  };
 
   return (
     <View
@@ -22,7 +24,12 @@ const RandomQuestionComponent = props => {
     >
       <Text>RandomQuestionComponent</Text>
       <Text>{randomQuestionState.currentRandomQuestion}</Text>
-      <Button title="next" onPress={() => {}}></Button>
+      <Button
+        title="next"
+        onPress={() => {
+          handleNextQuestion();
+        }}
+      ></Button>
     </View>
   );
 };
