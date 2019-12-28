@@ -6,10 +6,10 @@ class RandomQuestions {
     }
 
     _pickRandomQuestion(player){
-        let randomNumber = Math.floor(Math.Random() * this.questionsArray.length)
+        let randomNumber = Math.floor(Math.random() * this.questionsArray.length)
         let regex = /!Person!/
 
-        this.questionsArray[randomNumber].replace(regex, player)
+        if(player) this.questionsArray[randomNumber].replace(regex, player)
 
         return this.questionsArray[randomNumber]
     }

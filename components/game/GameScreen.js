@@ -15,6 +15,8 @@ const GameScreen = props => {
     });
   };
 
+  console.log("All games", allGames)
+
   let game = allGames.activeGame[0].component;
 
   return (
