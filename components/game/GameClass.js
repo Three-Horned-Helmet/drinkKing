@@ -3,6 +3,7 @@ import PekeLeken from "./PekeLeken/PekeLekenClass";
 import RandomQuestions from "./RandomQuestions/RandomQuestions";
 import PekeLekenComponent from "./PekeLeken/PekeLekenComponent";
 import RandomQuestionComponent from "./RandomQuestions/RandomQuestionComponent";
+import TrueOrFalse from "./TrueOrFalse/BooleanScreen";
 
 class Game {
   constructor() {
@@ -19,6 +20,12 @@ class Game {
         name: "Random Questions",
         weight: 5,
         component: <RandomQuestionComponent />
+      },
+      {
+        game: "",
+        name: "True or False",
+        weight: 3,
+        component: <TrueOrFalse />
       }
     ];
     this.activeGames = [];

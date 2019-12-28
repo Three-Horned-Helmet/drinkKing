@@ -4,7 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 
 import AddNamesMenu from "./components/menu/AddNamesMenu";
 import HomeScreen from "./components/menu/HomeScreen";
-import BooleanScreen from "./components/menu/BooleanScreen";
+import BooleanScreen from "./components/game/TrueOrFalse/BooleanScreen";
 import Game from "./components/game/GameScreen";
 
 const RootStack = createStackNavigator(
