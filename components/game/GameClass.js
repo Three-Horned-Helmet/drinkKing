@@ -1,9 +1,16 @@
 import React from "react";
+
 import PekeLeken from "./PekeLeken/PekeLekenClass";
-import RandomQuestions from "./RandomQuestions/RandomQuestions";
 import PekeLekenComponent from "./PekeLeken/PekeLekenComponent";
+
+import RandomQuestions from "./RandomQuestions/RandomQuestions";
 import RandomQuestionComponent from "./RandomQuestions/RandomQuestionComponent";
+
 import TrueOrFalse from "./TrueOrFalse/BooleanScreen";
+
+import LowestNumber from "./LowestNumber/LowestNumberClass";
+import LowestNumberComponent from "./LowestNumber/LowestNumberComponent";
+
 
 class Game {
   constructor() {
@@ -26,6 +33,12 @@ class Game {
         name: "True or False",
         weight: 3,
         component: <TrueOrFalse />
+      },
+      {
+        game: LowestNumber,
+        name: "Lowest Number",
+        weight: 1,
+        component: <LowestNumberComponent />
       }
     ];
     this.activeGames = [];
@@ -44,7 +57,9 @@ class Game {
   }
 
   _addMembers(members) {
+    console.log("Add members", members)
     this.members = members;
+    console.log("this.mameber", this.members)
   }
 
   _displayMembers() {
