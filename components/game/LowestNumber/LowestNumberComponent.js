@@ -35,11 +35,8 @@ const LowestNumberComponent = () => {
             ...numberPickedState,
             currentTurn: numberPickedState.currentTurn += 1
         })
-        console.log("Members", numberPickedState.members)
         if(!numberPickedState.members[newCurrentTurn+1]){
-            console.log("DONE")
             let results = LowestNumberClass._finishGame()
-            console.log("results", results.lowestNumber, results.lowestNumber.number)
             setNumberPickedState({
                 ...numberPickedState,
                 winner: results.lowestNumber,
@@ -49,8 +46,6 @@ const LowestNumberComponent = () => {
     }
 
     if(numberPickedState.winner){
-        console.log("Winner", numberPickedState.winner)
-        console.log("People who has to drink", numberPickedState.peopleWhoHasToDrink)
         let loserNumbers = " ", loserMembers = " ", winnerMember, winnerNumber
         if(numberPickedState.peopleWhoHasToDrink.length > 0){
             numberPickedState.peopleWhoHasToDrink.forEach((ele) => {
@@ -89,10 +84,10 @@ const LowestNumberComponent = () => {
                 keyboardType="numeric"
                 style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
                 value={numberPickedState.inputNumber.toString()}
-                defaultValue={"1"}
+                defaultValue={"0"}
                 onChangeText={inputNumberText => {
                     if (!inputNumberText) inputNumberText = 0;
-                    handleChangeInputText(inputNumberText);
+                    handleChangeInputText(Math.abs(inputNumberText));
                 }}
             />
             <Button

@@ -15,7 +15,6 @@ class LowestNumber {
         this.pickedNumbers.sort((a, b) => {
             return a.number - b.number
         })
-        console.log("sorted Numbers", this.pickedNumbers)
         this.pickedNumbers.forEach((ele, index) => {
             if(ele.number == this.pickedNumbers[Math.abs(index-1)].number || ele.number == this.pickedNumbers[(index+1)%this.pickedNumbers.length].number){
                 peopleWhoNeedsToDrink.push(ele)

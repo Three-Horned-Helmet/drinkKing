@@ -41,8 +41,6 @@ const AddNamesMenu = props => {
       participants: amount
     });
 
-    console.log("loginDetails Participants",loginDetails.participants)
-
     GameClass._addMembers(amount);
     props.navigation.navigate("GameScreen");
   };
@@ -57,7 +55,6 @@ const AddNamesMenu = props => {
       currentParticipant: ""
     });
 
-    console.log("HandleParticipantsPush", loginDetails.participants)
 
     GameClass._addMembers(loginDetails.participants);
   };
@@ -86,7 +83,6 @@ const AddNamesMenu = props => {
         value={loginDetails.numberOfParticipants.toString()}
         defaultValue={"0"}
         onChangeText={numberOfParticipants => {
-          console.log("On change", numberOfParticipants)
           if (!numberOfParticipants) numberOfParticipants = 0;
           handleNumberOfParticipants(numberOfParticipants);
         }}
