@@ -32,16 +32,18 @@ const AddNamesMenu = props => {
   };
 
   const autoFillNames = () => {
-    console.log("hi");
     const amount = Array(loginDetails.numberOfParticipants)
       .fill()
-      .map((e, i) => i + 1);
+      .map((e, i) => (i + 1).toString());
 
     setLoginDetails({
       ...loginDetails,
       participants: amount
     });
-    GameClass._addMembers(loginDetails.participants);
+
+    console.log("loginDetails Participants",loginDetails.participants)
+
+    GameClass._addMembers(amount);
     props.navigation.navigate("GameScreen");
   };
 
@@ -54,6 +56,8 @@ const AddNamesMenu = props => {
       participants: participantsArray,
       currentParticipant: ""
     });
+
+    console.log("HandleParticipantsPush", loginDetails.participants)
 
     GameClass._addMembers(loginDetails.participants);
   };
@@ -82,6 +86,7 @@ const AddNamesMenu = props => {
         value={loginDetails.numberOfParticipants.toString()}
         defaultValue={"0"}
         onChangeText={numberOfParticipants => {
+          console.log("On change", numberOfParticipants)
           if (!numberOfParticipants) numberOfParticipants = 0;
           handleNumberOfParticipants(numberOfParticipants);
         }}
