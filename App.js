@@ -4,13 +4,13 @@ import { createStackNavigator } from "react-navigation-stack";
 
 import AddNamesMenu from "./components/menu/AddNamesMenu";
 import HomeScreen from "./components/menu/HomeScreen";
-import BooleanScreen from "./components/game/TrueOrFalse/BooleanScreen";
+import BooleanScreen from "./components/menu/BooleanScreen";
 import Game from "./components/game/GameScreen";
 
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    AddNamesMenu: AddNamesMenu,
+    AddNamesMenu: TicTacToe,
     Boolean: BooleanScreen,
     GameScreen: Game
   },
