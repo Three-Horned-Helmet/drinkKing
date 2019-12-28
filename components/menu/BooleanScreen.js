@@ -129,7 +129,7 @@ const BooleanScreen = props => {
     return gameOver;
   };
 
-  // style. Wrong
+  // style. Sanatize
   const styles = StyleSheet.create({
     container: {
       flex: 1,
