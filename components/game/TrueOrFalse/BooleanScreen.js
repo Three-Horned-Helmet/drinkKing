@@ -152,8 +152,8 @@ const BooleanScreen = props => {
       fontSize: 40
     },
     question: {
-      marginTop: 150,
-      fontSize: 40
+      marginTop: 50,
+      fontSize: 25
     },
     gameOverText: {
       color: "#fff",

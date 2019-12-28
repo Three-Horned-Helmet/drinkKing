@@ -4,18 +4,19 @@ import GameClass from "../game/GameClass";
 
 const GameScreen = props => {
   const [allGames, setAllGames] = useState({
-    activeGame: GameClass._getOneGame()
+    listOfGames: GameClass._getAllGames(),
+    activeGame: GameClass._getAllGames(),
+    counter: 0
   });
 
   const changeGame = () => {
-    const arrayCopy = allGames.activeGame;
-    arrayCopy.shift();
     setAllGames({
-      activeGame: arrayCopy
+      ...allGames,
+      counter: allGames.counter+1
     });
   };
 
-  let game = allGames.activeGame[0].component;
+  let game = allGames.listOfGames[allGames.counter%allGames.listOfGames.length].component;
 
   return (
     <View

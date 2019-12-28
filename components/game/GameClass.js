@@ -57,9 +57,7 @@ class Game {
   }
 
   _addMembers(members) {
-    console.log("Add members", members)
     this.members = members;
-    console.log("this.mameber", this.members)
   }
 
   _displayMembers() {
@@ -96,16 +94,6 @@ class Game {
     return this.completeGamesList[
       Math.floor(Math.random() * this.completeGamesList.length)
     ];
-  }
-
-  _getOneGame() {
-    return this.completeGamesList;
-  }
-
-  _endGame() {
-    console.log("end game", this.completeGamesList[1].name);
-    this.completeGamesList.shift();
-    console.log("game has been ended", this.completeGamesList[0].name);
   }
 }
 

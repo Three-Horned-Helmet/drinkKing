@@ -12,7 +12,6 @@ const PekeLekenCompoment = props => {
       }}
     >
       <Text>PekeLeken Component</Text>
-      <Button title="Press me" onPress={() => GameClass._endGame()} />
     </View>
   );
 };
