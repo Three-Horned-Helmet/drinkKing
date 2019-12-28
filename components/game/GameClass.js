@@ -40,6 +40,14 @@ class Game {
     this.members = members;
   }
 
+  _displayMembers() {
+    return console.log("members", this.members);
+  }
+
+  _getMembers(){
+    return this.members
+  }
+
   _gameInitiate() {
     this.activeGames = [];
     this.members;
@@ -56,10 +64,6 @@ class Game {
         i -= 1;
       }
     }
-  }
-
-  _displayMembers() {
-    return console.log("members", this.members);
   }
 
   _getAllGames() {
