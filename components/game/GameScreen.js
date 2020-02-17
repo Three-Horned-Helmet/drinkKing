@@ -27,7 +27,7 @@ const GameScreen = props => {
       }}
     >
       {game}
-      <Button title="next game" onPress={() => changeGame()} />
+      <Button title="next game" style={{position: "absolute", zIndex: 100}} onPress={() => changeGame()} />
     </View>
   );
 };

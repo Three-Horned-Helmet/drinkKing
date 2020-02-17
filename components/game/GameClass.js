@@ -10,7 +10,7 @@ import TrueOrFalse from "./TrueOrFalse/BooleanScreen";
 
 import LowestNumber from "./LowestNumber/LowestNumberClass";
 import LowestNumberComponent from "./LowestNumber/LowestNumberComponent";
-
+import TicTacToe from "./TicTacToe/Game";
 
 class Game {
   constructor() {
@@ -39,7 +39,14 @@ class Game {
         name: "Lowest Number",
         weight: 1,
         component: <LowestNumberComponent />
+      },
+      {
+        game: TicTacToe,
+        name: "TicTacToe",
+        weight: 1,
+        component: <TicTacToe />
       }
+      
     ];
     this.activeGames = [];
 

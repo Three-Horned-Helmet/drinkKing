@@ -19,7 +19,7 @@ const RandomQuestionComponent = props => {
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       <Text>RandomQuestionComponent</Text>
