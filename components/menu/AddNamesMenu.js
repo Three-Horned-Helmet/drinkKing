@@ -52,8 +52,6 @@ const AddNamesMenu = props => {
   };
 
   const handleParticipantPush = x => {
-    console.log("yoooooo");
-    console.debug("text");
     const participantsArray = loginDetails.participants;
 
     participantsArray.push(x);
@@ -71,24 +69,43 @@ const AddNamesMenu = props => {
     </TouchableWithoutFeedback>;
   };
 
-  const removeParticipants = (name) => {
-    console.log(name)
-    let allParticipants = this.loginDetails.participants
-    allParticipants.splice(allParticipants.indexOf(name), 1)
-    console.log(allParticipants)
-    
+  const removeParticipants = name => {
+    console.log(name);
+    let allParticipants = loginDetails.participants;
+    allParticipants.splice(allParticipants.indexOf(name), 1);
+    console.log(allParticipants);
+
     setLoginDetails({
       ...loginDetails,
-      participants: allParticipants,
+      participants: allParticipants
     });
-  }
+  };
 
   const renderParticipants = () => {
     return loginDetails.participants.map((item, index) => (
-      <TouchableWithoutFeedback  key={index} onPress={() => removeParticipants(item)}>
-        <Text style={styles.participantsList}>
-          {item}
-        </Text>
+      <TouchableWithoutFeedback
+        key={index}
+        onPress={() => removeParticipants(item)}
+      >
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "center",
+            maxHeight: "8%"
+          }}
+        >
+          <Image
+            source={require("../../assets/delete-x.png")}
+            style={{
+              width: "10%",
+              height: "40%",
+              marginRight: 2,
+              marginTop: 5
+            }}
+          />
+          <Text style={styles.participantsList}>{item}</Text>
+        </View>
       </TouchableWithoutFeedback>
     ));
   };
@@ -165,10 +182,15 @@ const AddNamesMenu = props => {
           style={{
             flex: 1,
             marginTop: 25,
-            textAlign: "center",
-            width: "20%"
+            textAlign: "center"
           }}
         >
+          {loginDetails.participants.length > 0 ||
+          loginDetails.numberOfParticipants > 0 ? (
+            <Text style={[styles.title, styles.tapToRemove]}>Tap to remove</Text>
+          ) : (
+            <View></View>
+          )}
           {renderParticipants()}
         </View>
       </View>
@@ -204,6 +226,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center"
+  },
+  tapToRemove: {
+    marginBottom: 10,
+    fontSize: 20
   }
 });
 
