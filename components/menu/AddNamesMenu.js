@@ -22,39 +22,46 @@ const AddNamesMenu = props => {
   });
 
   const handleNumberOfParticipants = amount => {
+    let numOfParticipants = 0;
+    if (amount > 0) {
+      numOfParticipants = parseInt(amount);
+    }
     setLoginDetails({
       ...loginDetails,
-      numberOfParticipants: parseInt(amount)
+      numberOfParticipants: numOfParticipants
     });
   };
 
-  const autoFillNames = (continueToGame) => {
+  const autoFillNames = continueToGame => {
     console.log("helllo??");
 
-      // const amount = Array(loginDetails.numberOfParticipants)
-      //   .fill()
-      //   .map((e, i) => (i + 1).toString());
+    // const amount = Array(loginDetails.numberOfParticipants)
+    //   .fill()
+    //   .map((e, i) => (i + 1).toString());
 
-      const amount = loginDetails.participants
+    const amount = loginDetails.participants.filter(
+      ele => !Number.isInteger(ele)
+    );
 
-      for(let i = 1; i <= loginDetails.numberOfParticipants; i++){
-        if(amount.indexOf(i) === -1){
-          amount.push(i)
-        }
+    console.log("amount", amount);
+
+    for (let i = 1; i <= loginDetails.numberOfParticipants; i++) {
+      if (amount.indexOf(i) === -1) {
+        amount.push(i);
       }
+    }
 
-      // In the future: Fix it so that the sort function only sorts the numbers and not the names as well...
-      amount.sort()
+    // In the future: Fix it so that the sort function only sorts the numbers and not the names as well...
+    // BUG: it sorts like this... (1, 10, 11, 2, 3, 4...)
+    amount.sort();
 
-      setLoginDetails({
-        ...loginDetails,
-        participants: amount
-      });
-  
-      GameClass._addMembers(amount);
-      if(continueToGame) props.navigation.navigate("GameScreen");
-    
+    setLoginDetails({
+      ...loginDetails,
+      participants: amount
+    });
 
+    GameClass._addMembers(amount);
+    if (continueToGame) props.navigation.navigate("GameScreen");
   };
 
   const handleParticipantPush = x => {
@@ -142,12 +149,10 @@ const AddNamesMenu = props => {
             <TextInput
               keyboardType="numeric"
               style={styles.inputs}
-              value={loginDetails.numberOfParticipants.toString()}
-              defaultValue={"0"}
               onChangeText={numberOfParticipants => {
-                if (!numberOfParticipants) numberOfParticipants = 0;
                 handleNumberOfParticipants(numberOfParticipants);
               }}
+              placeholder={"0"}
             />
             {/* <TouchableOpacity
       style={styles.autoFillNames}
@@ -159,12 +164,7 @@ const AddNamesMenu = props => {
         />
       </TouchableOpacity> */}
 
-            <Button
-              title="Autofill Names"
-              onPress={() =>
-                autoFillNames()
-              }
-            />
+            <Button title="Autofill Names" onPress={() => autoFillNames()} />
           </View>
           <View>
             <TextInput
@@ -192,7 +192,9 @@ const AddNamesMenu = props => {
           }}
         >
           {loginDetails.participants.length > 0 ? (
-            <Text style={[styles.title, styles.tapToRemove]}>Tap to remove</Text>
+            <Text style={[styles.title, styles.tapToRemove]}>
+              Tap to remove
+            </Text>
           ) : (
             <View></View>
           )}
