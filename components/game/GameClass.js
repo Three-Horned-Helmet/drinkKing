@@ -64,7 +64,11 @@ class Game {
   }
 
   _addMembers(members) {
-    this.members = members;
+    // for(let i = 1; i <= amount; i++){
+    //   members.push(i)
+    // }
+    // console.log("MEMBERS", members)
+  this.members = members;
   }
 
   _displayMembers() {

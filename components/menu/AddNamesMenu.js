@@ -21,13 +21,6 @@ const AddNamesMenu = props => {
     numberOfParticipants: 0
   });
 
-  const setAutoFillNameCount = numberOfParticipants => {
-    setLoginDetails({
-      ...loginDetails,
-      numberOfParticipants: numberOfParticipants
-    });
-  };
-
   const handleNumberOfParticipants = amount => {
     setLoginDetails({
       ...loginDetails,
@@ -35,20 +28,33 @@ const AddNamesMenu = props => {
     });
   };
 
-  const autoFillNames = () => {
+  const autoFillNames = (continueToGame) => {
     console.log("helllo??");
 
-    const amount = Array(loginDetails.numberOfParticipants)
-      .fill()
-      .map((e, i) => (i + 1).toString());
+      // const amount = Array(loginDetails.numberOfParticipants)
+      //   .fill()
+      //   .map((e, i) => (i + 1).toString());
 
-    setLoginDetails({
-      ...loginDetails,
-      participants: amount
-    });
+      const amount = loginDetails.participants
 
-    GameClass._addMembers(amount);
-    props.navigation.navigate("GameScreen");
+      for(let i = 1; i <= loginDetails.numberOfParticipants; i++){
+        if(amount.indexOf(i) === -1){
+          amount.push(i)
+        }
+      }
+
+      // In the future: Fix it so that the sort function only sorts the numbers and not the names as well...
+      amount.sort()
+
+      setLoginDetails({
+        ...loginDetails,
+        participants: amount
+      });
+  
+      GameClass._addMembers(amount);
+      if(continueToGame) props.navigation.navigate("GameScreen");
+    
+
   };
 
   const handleParticipantPush = x => {
@@ -128,7 +134,7 @@ const AddNamesMenu = props => {
         >
           {loginDetails.participants.length > 0 ||
           loginDetails.numberOfParticipants > 0 ? (
-            <Button title="Continue" onPress={() => autoFillNames()} />
+            <Button title="Continue" onPress={() => autoFillNames(true)} />
           ) : (
             <Text style={styles.title}>Add participants</Text>
           )}
@@ -156,7 +162,7 @@ const AddNamesMenu = props => {
             <Button
               title="Autofill Names"
               onPress={() =>
-                setAutoFillNameCount(loginDetails.numberOfParticipants)
+                autoFillNames()
               }
             />
           </View>
@@ -185,8 +191,7 @@ const AddNamesMenu = props => {
             textAlign: "center"
           }}
         >
-          {loginDetails.participants.length > 0 ||
-          loginDetails.numberOfParticipants > 0 ? (
+          {loginDetails.participants.length > 0 ? (
             <Text style={[styles.title, styles.tapToRemove]}>Tap to remove</Text>
           ) : (
             <View></View>
