@@ -37,7 +37,7 @@ const Board = props => {
     if (n) {
       return n;
     }
-    return "null";
+    return "";
   };
 
   const renderSquare = n => {
