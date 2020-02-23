@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, View, Text } from "react-native";
+import { Button, View, Text, ImageBackground } from "react-native";
 import GameClass from "../game/GameClass";
 
 const GameScreen = props => {
@@ -19,16 +19,19 @@ const GameScreen = props => {
   let game = allGames.listOfGames[allGames.counter%allGames.listOfGames.length].component;
 
   return (
+    <ImageBackground style={{height: "100%", width: "100%"}} source={require("../../assets/background-img-add-names.jpg")}>
     <View
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       {game}
-      <Button title="next game" style={{position: "absolute", zIndex: 100}} onPress={() => changeGame()} />
     </View>
+      <Button title="next game" style={{position: "absolute", zIndex: 100}} onPress={() => changeGame()} />
+
+    </ImageBackground>
   );
 };
 

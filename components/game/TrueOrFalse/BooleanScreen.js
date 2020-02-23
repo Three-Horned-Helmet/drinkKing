@@ -110,8 +110,14 @@ const BooleanScreen = props => {
           {questionText(trueFalseState.currentQuestion)}
         </Text>
         <View style={styles.buttons}>
-          <Button onPress={() => checkAnswer("True")} title="true" />
-          <Button onPress={() => checkAnswer("False")} title="false" />
+          <TouchableOpacity style={styles.eachButton} onPress={() => checkAnswer("True")}>
+              <Text style={styles.eachButtonText}>True</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.eachButton} onPress={() => checkAnswer("False")}>
+              <Text style={styles.eachButtonText}>False</Text>
+          </TouchableOpacity>
+          {/* <Button onPress={() => checkAnswer("True")} title="true" />
+          <Button onPress={() => checkAnswer("False")} title="false" /> */}
         </View>
       </View>
     );
@@ -138,10 +144,27 @@ const BooleanScreen = props => {
       alignItems: "center",
       paddingHorizontal: 10
     },
+    eachButton: {
+      backgroundColor: "rgba(0, 0, 255, 0.7)",
+      height: 50,
+      width: 100,
+      borderColor: "black",
+      borderWidth: 2,
+      borderRadius: 10,
+    },
+    eachButtonText: {
+      fontSize: 30,
+      fontWeight: "bold",
+      textAlign: "center",
+      color: "white",
+    },
     buttons: {
       flex: 1,
       flexDirection: "row",
-      justifyContent: "space-around"
+      alignItems: "flex-end",
+      justifyContent: "space-around",      
+      height: 30,
+      marginBottom: 30,
     },
     currentPoints: {
       fontSize: 25,

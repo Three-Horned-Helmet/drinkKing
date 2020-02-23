@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import {
-  Button,
-  View,
-  Text,
-  ScrollView
-} from "react-native";
+import { Button, View, Text, ScrollView, TouchableOpacity } from "react-native";
+
+import styles from "./lowestNumberStyles";
 
 import LowestNumberClass from "./LowestNumberClass";
 import GameClass from "../GameClass";
@@ -20,8 +17,6 @@ const LowestNumberComponent = () => {
   });
 
   const handleChangeInputText = inputNumberText => {
-    console.log(numberScroller.numbersArray);
-
     setNumberPickedState({
       ...numberPickedState,
       inputNumber: inputNumberText.toString()
@@ -29,9 +24,9 @@ const LowestNumberComponent = () => {
   };
 
   const handleButtonClick = () => {
-    let newCurrentTurn = numberPickedState.currentTurn + 1
+    let newCurrentTurn = numberPickedState.currentTurn + 1;
     //numberPickedState.pickedNumbers.push(numberPickedState.inputNumber);
-    
+
     LowestNumberClass._addNumberToArray(
       numberScroller.activeNumber,
       numberPickedState.members[numberPickedState.currentTurn]
@@ -43,13 +38,9 @@ const LowestNumberComponent = () => {
     });
 
     setNumberScroller({
-        ...numberScroller,
-        activeNumber: 0
-    })
-
-    console.log(numberPickedState.members)
-    console.log("MEMEBERS LENGTH", numberPickedState.members.length)
-    console.log("CURRENT TURN", newCurrentTurn)
+      ...numberScroller,
+      activeNumber: 0
+    });
 
     if (numberPickedState.members.length <= newCurrentTurn) {
       let results = LowestNumberClass._finishGame();
@@ -132,41 +123,60 @@ const LowestNumberComponent = () => {
       arrayCounter++;
     }
 
-    return viewArray.map((ele, index) => {
+    return viewArray.reverse().map((ele, index) => {
       if (index === 0 || index === viewArray.length - 1) {
         return (
-          <Text style={{ color: "rgba(0, 0, 0, 0.15)" }} key={ele}>
+          <Text
+            style={[styles.counterText, { color: "rgba(0, 0, 0, 0.15)" }]}
+            key={ele}
+          >
             {ele}
           </Text>
         );
       } else if (index === 1 || index === viewArray.length - 2) {
         return (
-          <Text style={{ color: "rgba(0,0,0,0.35)" }} key={ele}>
+          <Text
+            style={[styles.counterText, { color: "rgba(0,0,0,0.35)" }]}
+            key={ele}
+          >
             {ele}
           </Text>
         );
       }
-      return <Text key={ele}>{ele}</Text>;
+      return (
+        <Text style={[styles.counterText, {color: "rgb(190, 0, 0)", fontWeight:"bold"}]} key={ele}>
+          {ele}
+        </Text>
+      );
     });
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <Text style={styles.header}>Lowest Number</Text>
+
+      <Text style={styles.currentTurnToPickText}>
+        {numberPickedState.members[numberPickedState.currentTurn]}'s turn to
+        pick!
+      </Text>
+
       {/* --------- */}
-      <View>
+      <View style={styles.counterContainer}>
         <View>{renderNumberScroller()}</View>
-        <Button
-          title="+"
-          onPress={() => {
-            increaseActiveNumberScroller(1);
-          }}
-        ></Button>
-        <Button
-          title="-"
-          onPress={() => {
-            increaseActiveNumberScroller(-1);
-          }}
-        ></Button>
+        <View style={styles.counterButtonsContainer}>
+          <TouchableOpacity
+            style={styles.eachButton}
+            onPress={() => increaseActiveNumberScroller(1)}
+          >
+            <Text style={styles.eachButtonText}>+</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.eachButton}
+            onPress={() => increaseActiveNumberScroller(-1)}
+          >
+            <Text style={styles.eachButtonText}>-</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       {/* --------- */}
 
@@ -179,14 +189,13 @@ const LowestNumberComponent = () => {
       </View> */}
 
       {/* ---------- */}
-      <Text>Lowest Number</Text>
 
-      <Button
-        title="Guess"
-        onPress={() => {
-          handleButtonClick();
-        }}
-      />
+      <TouchableOpacity
+        style={styles.guessButton}
+        onPress={() => handleButtonClick()}
+      >
+        <Text style={styles.guessButtonText}>Guess</Text>
+      </TouchableOpacity>
     </View>
   );
 };

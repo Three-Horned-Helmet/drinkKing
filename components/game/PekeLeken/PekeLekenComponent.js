@@ -11,7 +11,7 @@ const PekeLekenCompoment = props => {
         justifyContent: "center"
       }}
     >
-      <Text>PekeLeken Component</Text>
+      <Text style={{color: "white"}}>PekeLeken Component</Text>
     </View>
   );
 };

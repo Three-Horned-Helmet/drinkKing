@@ -22,8 +22,8 @@ const RandomQuestionComponent = props => {
         justifyContent: "center",
       }}
     >
-      <Text>RandomQuestionComponent</Text>
-      <Text>{randomQuestionState.currentRandomQuestion}</Text>
+      <Text style={{color: "white"}}>RandomQuestionComponent</Text>
+      <Text style={{color: "white"}}>{randomQuestionState.currentRandomQuestion}</Text>
       <Button
         title="next"
         onPress={() => {
