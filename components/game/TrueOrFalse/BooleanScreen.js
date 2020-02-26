@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
+import defStyles from "../default-styles";
+
 const BooleanScreen = props => {
   const [trueFalseState, setTrueFalseState] = useState({
     correctAnswers: 0,
@@ -102,23 +104,14 @@ const BooleanScreen = props => {
       <Text>Loading..</Text>
     ) : (
       <View>
-        <Text style={styles.currentPlayer}>{trueFalseState.currentPlayer}</Text>
+        <Text style={defStyles.header}>True or False</Text>
+        <Text style={defStyles.miniHeader}>{trueFalseState.currentPlayer}</Text>
         <Text style={styles.currentPoints}>
           Current sips: {trueFalseState.currentQuestion}
         </Text>
-        <Text style={styles.question}>
+        <Text style={[defStyles.text, styles.statementText]}>
           {questionText(trueFalseState.currentQuestion)}
         </Text>
-        <View style={styles.buttons}>
-          <TouchableOpacity style={styles.eachButton} onPress={() => checkAnswer("True")}>
-              <Text style={styles.eachButtonText}>True</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.eachButton} onPress={() => checkAnswer("False")}>
-              <Text style={styles.eachButtonText}>False</Text>
-          </TouchableOpacity>
-          {/* <Button onPress={() => checkAnswer("True")} title="true" />
-          <Button onPress={() => checkAnswer("False")} title="false" /> */}
-        </View>
       </View>
     );
     return question;
@@ -137,56 +130,44 @@ const BooleanScreen = props => {
 
   // style. Sanatize
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: trueFalseState.backgroundColor,
-      justifyContent: "center",
-      alignItems: "center",
-      paddingHorizontal: 10
-    },
-    eachButton: {
-      backgroundColor: "rgba(0, 0, 255, 0.7)",
-      height: 50,
-      width: 100,
-      borderColor: "black",
-      borderWidth: 2,
-      borderRadius: 10,
-    },
-    eachButtonText: {
-      fontSize: 30,
-      fontWeight: "bold",
-      textAlign: "center",
-      color: "white",
-    },
-    buttons: {
+    buttonsContainer: {
       flex: 1,
       flexDirection: "row",
       alignItems: "flex-end",
-      justifyContent: "space-around",      
-      height: 30,
-      marginBottom: 30,
+      justifyContent: "space-around",
+      position: "absolute",
+      bottom: 0
     },
     currentPoints: {
-      fontSize: 25,
-      marginTop: 20
-    },
-    currentPlayer: {
-      marginTop: 40,
-      fontSize: 40
-    },
-    question: {
-      marginTop: 50,
-      fontSize: 25
+      fontSize: 20,
+      marginTop: 0
     },
     gameOverText: {
       color: "#fff",
       fontSize: 50
+    },
+    statementText: {
+      
     }
   });
 
   return (
-    <View style={styles.container}>
+    <View style={defStyles.container}>
       {trueFalseState.gameOver ? gameOverGenerator() : questionGenerator()}
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity
+          style={[defStyles.button, styles.buttons]}
+          onPress={() => checkAnswer("True")}
+        >
+          <Text style={defStyles.buttonText}>True</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[defStyles.button, styles.buttons]}
+          onPress={() => checkAnswer("False")}
+        >
+          <Text style={defStyles.buttonText}>False</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

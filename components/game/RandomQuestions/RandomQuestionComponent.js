@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Button, View, Text } from "react-native";
+import { Button, View, Text, TouchableOpacity } from "react-native";
 import RandomQuestion from "./RandomQuestions";
+
+import styles from "./randomQuestions-styles";
 
 const RandomQuestionComponent = props => {
   const [randomQuestionState, setRandomQuestionState] = useState({
@@ -15,22 +17,22 @@ const RandomQuestionComponent = props => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
+    <TouchableOpacity
+      onPress={() => {
+        handleNextQuestion();
       }}
     >
-      <Text style={{color: "white"}}>RandomQuestionComponent</Text>
-      <Text style={{color: "white"}}>{randomQuestionState.currentRandomQuestion}</Text>
-      <Button
-        title="next"
-        onPress={() => {
-          handleNextQuestion();
-        }}
-      ></Button>
-    </View>
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>Questions!</Text>
+        </View>
+        <View style={styles.questionContainer}>
+          <Text style={styles.questionText}>
+            {randomQuestionState.currentRandomQuestion}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 

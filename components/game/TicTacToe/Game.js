@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
+import defStyles from "../default-styles"
+
 // square component
 // todo, add borders
 // todo, make into squares

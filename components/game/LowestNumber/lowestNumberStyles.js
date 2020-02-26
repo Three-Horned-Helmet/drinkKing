@@ -67,7 +67,7 @@ export default StyleSheet.create({
         fontSize: 25,
         textAlign: "center",
         color: "white",
-        marginTop: "auto",
+        marginTop: 4,
         marginBottom: "auto",
         marginLeft: "auto",
         marginRight: "auto"

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     color: "yellow", 
     textAlign: "center", 
     marginTop: 10, 
-    fontFamily: "sans-serif", 
+   // fontFamily: "sans-serif", 
     marginLeft: 25, 
     marginRight: 25 
   },
