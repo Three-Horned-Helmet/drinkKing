@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import defStyles from "../default-styles"
+import defStyles from "../default-styles";
 
 // square component
 // todo, add borders
 // todo, make into squares
 const Square = props => {
-  return <Button title={props.value} onPress={props.onPress}></Button>;
+  return (
+    <TouchableOpacity onPress={props.onPress}>
+      <View style={[props.styleSquare, {alignItems: "center", justifyContent: "center",height: 30, borderColor: "black", borderWidth: 0.7}]}>
+          <Text style={{textAlign: "center"}}>{props.value}</Text>
+      </View>
+    </TouchableOpacity>
+  )
 };
 
 // board component with logic
@@ -43,8 +49,14 @@ const Board = props => {
   };
 
   const renderSquare = n => {
+    let styleSquare = { backgroundColor: "rbg(200, 200, 200)" };
+    if (n % 2 === 0) {
+      styleSquare = { backgroundColor: "rbg(230, 230, 230)" };
+    }
+
     return (
       <Square
+        styleSquare={styleSquare}
         value={convertToString(tttGameState.squares[n])}
         onPress={() => handlePress(n)}
       />
@@ -153,7 +165,7 @@ const styles = StyleSheet.create({
     width: 125
   },
   col3: {
-    backgroundColor: "yellow",
+    backgroundColor: "powderblue",
     width: 125
   }
 });

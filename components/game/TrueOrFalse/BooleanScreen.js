@@ -136,7 +136,7 @@ const BooleanScreen = props => {
       alignItems: "flex-end",
       justifyContent: "space-around",
       position: "absolute",
-      bottom: 0
+      bottom: 5
     },
     currentPoints: {
       fontSize: 20,
